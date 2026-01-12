@@ -1,0 +1,57 @@
+[versions]
+agp = "8.13.2"
+kotlin = "2.2.21"
+ksp = "2.2.21-1.0.25"     # match Kotlin version family (see KSP guidance)  [8](https://www.classcentral.com/course/youtube-kotlin-2-3-0-new-compose-features-more-mobile-dev-news-january-2026-519102)
+
+compose-bom = "2025.12.00"  # Compose BOM version (keeps Compose libs aligned) [3](https://androidstudio.googleblog.com/2026/01/)
+activity-compose = "1.12.2"
+navigation-compose = "2.9.6"
+
+hilt = "2.57.2"
+retrofit = "3.0.0"
+okhttp = "4.12.0"
+room = "2.8.4"
+coroutines = "1.8.1"
+
+compileSdk = "35"
+minSdk = "24"
+targetSdk = "35"
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android      = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+hilt-android        = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+ksp                 = { id = "com.google.devtools.ksp",        version.ref = "ksp" }
+
+[libraries]
+# Compose BOM as a platform; individual Compose libs omit versions.
+compose-bom               = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }  # [3](https://androidstudio.googleblog.com/2026/01/)
+compose-material3         = { module = "androidx.compose.material3:material3" }
+compose-ui                = { module = "androidx.compose.ui:ui" }
+compose-ui-tooling        = { module = "androidx.compose.ui:ui-tooling" }
+compose-ui-tooling-prev   = { module = "androidx.compose.ui:ui-tooling-preview" }
+activity-compose          = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }  # [11](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository)
+navigation-compose        = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }  # [12](https://github.com/tuist/tuist)
+
+# Hilt (Dagger) + Compose integration
+hilt-android              = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }        # [4](https://fastmcp.me/MCP/Details/1068/nodejs-api-documentation)
+hilt-compiler             = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
+hilt-navigation-compose   = { module = "androidx.hilt:hilt-navigation-compose", version = "1.2.0" }     # [13](https://swiftpackageindex.com/yonaskolb/XcodeGen)
+
+# Retrofit + OkHttp (+ Moshi converter; swap to Gson if needed)
+retrofit                  = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }   # [6](https://stackoverflow.com/questions/74314624/github-oauth-apps-whats-the-most-granular-scope-to-get-access-to-pull-requests)
+retrofit-converter-moshi  = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
+okhttp                    = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }         # [7](https://dev.to/zuplo/custom-scopes-in-oauth-step-by-step-guide-46gl)
+okhttp-logging            = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
+
+# Room + coroutines (use KSP compiler)
+room-runtime              = { module = "androidx.room:room-runtime", version.ref = "room" }             # [5](https://cookiecutter.readthedocs.io/en/1.7.0/README.html)
+room-ktx                  = { module = "androidx.room:room-ktx",     version.ref = "room" }
+room-compiler             = { module = "androidx.room:room-compiler", version.ref = "room" }
+coroutines-android        = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+
+[bundles]
+compose-core      = [ "compose-material3", "compose-ui", "compose-ui-tooling-prev" ]
+network-stack     = [ "retrofit", "retrofit-converter-moshi", "okhttp", "okhttp-logging" ]
+room-stack        = [ "room-runtime", "room-ktx" ]
+hilt-stack        = [ "hilt-android", "hilt-navigation-compose" ]
