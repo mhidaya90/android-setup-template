@@ -35,7 +35,11 @@ This repository is a **template** for creating modern Android apps with:
 - **OkHttp:** 4.x
 - **Room:** 2.8.x
 
----app/
+---
+
+## 📂 Project Structure
+
+app/
 ├─ build.gradle.kts
 ├─ src/main/
 │   ├─ AndroidManifest.xml
@@ -48,6 +52,4 @@ This repository is a **template** for creating modern Android apps with:
 │       ├─ data/ (network, db, repository)
 │       └─ ui/ (login, dashboard)
 gradle/libs.versions.toml
-
-## 📂 Project Structure
 
