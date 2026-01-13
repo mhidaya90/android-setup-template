@@ -29,20 +29,20 @@ android {
 dependencies {
   // Compose BOM first, then Compose libs without versions. [3](https://androidstudio.googleblog.com/2026/01/)
   implementation(platform(libs.compose.bom))
-  implementation(libs.bundles.compose-core)
+  implementation(libs.bundles.compose.core)
   implementation(libs.activity.compose)
   implementation(libs.navigation.compose)
   debugImplementation(libs.compose.ui.tooling)
 
   // Hilt + KSP compiler
-  implementation(libs.bundles.hilt-stack)
+  implementation(libs.bundles.hilt.stack)
   ksp(libs.hilt.compiler)
 
   // Retrofit + OkHttp stack
-  implementation(libs.bundles.network-stack)
+  implementation(libs.bundles.network.stack)
 
   // Room + KSP compiler + coroutines
-  implementation(libs.bundles.room-stack)
+  implementation(libs.bundles.room.stack)
   ksp(libs.room.compiler)
   implementation(libs.coroutines.android)
 }
