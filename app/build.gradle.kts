@@ -4,6 +4,7 @@ plugins {
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.hilt.android)
   alias(libs.plugins.ksp)
+  alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -17,12 +18,20 @@ android {
     versionCode = 1
     versionName = "1.0"
   }
+  @Suppress("DEPRECATION")
+  dexOptions {
+    javaMaxHeapSize = "4g"
+  }
 
   buildFeatures { compose = true }
 
   // Compose compiler is not part of the BOM; set explicitly. [3](https://androidstudio.googleblog.com/2026/01/)
   composeOptions { kotlinCompilerExtensionVersion = "1.5.14" }
-
+  compileOptions {
+        // Sets the Java compiler target
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
   kotlinOptions { jvmTarget = "17" }
 }
 
@@ -33,6 +42,8 @@ dependencies {
   implementation(libs.activity.compose)
   implementation(libs.navigation.compose)
   debugImplementation(libs.compose.ui.tooling)
+  implementation(libs.material)
+  implementation(libs.compose.icons.extended)  
 
   // Hilt + KSP compiler
   implementation(libs.bundles.hilt.stack)
@@ -40,6 +51,7 @@ dependencies {
 
   // Retrofit + OkHttp stack
   implementation(libs.bundles.network.stack)
+  implementation(libs.moshi.kotlin) 
 
   // Room + KSP compiler + coroutines
   implementation(libs.bundles.room.stack)
